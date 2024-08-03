@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My prtfolio</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="/portfolio/index.html">Home</li></a>
+                    <li><a href="/portfolio/intro.html">My intro</li></a>
+                    <li><a href="/portfolio/blog.html">Blog</li></a>
+                    <li><a href="/portfolio/contact.html">Contact</li></a>
+                </ul>
+            </nav>
+        </div>
+        <div class="main">
+            <div class="hamburger">
+                <img src="menu.webp" alt="" class="ham" width="23">
+                <img src="cross-24-128.webp" alt="" class="cross" width="23">
+            </div>
+            <div class="contactform">
+                <div class="contactdiv">
+                <h1>CONTACT ME FOR WORK/INTERNSHIP <img src="rocket.jpeg" alt=""></h1>
+                    <form action="/send-email" method="POST">
+                        <div class="mb-3">
+                            <label for="clientname" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="clientname" name="clientname"
+                                aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientemail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="clientemail" name="clientemail"
+                                aria-describedby="emailHelp" required>
+                            <div id="emailHelp" class="form-text">We'll never share your email & phone with anyone else.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientphone" class="form-label">Phone</label>
+                            <input type="phone" class="form-control" id="clientphone" name="clientphone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientsuggestions" class="form-label">Suggestions</label>
+                            <input type="text" class="form-control" id="clientsuggestions" name="clientsuggestions">
+                        </div>
+                        <div class="mb-3" id="form-check">
+                            <input type="checkbox" class="form-check-input" id="isclient" name="isclient">
+                            <label class="form-check-label" for="isclient">You are hiring me in this project</label>
+                        </div>
+                        <div class="buttons"><button type="submit" class="btn btn-sm">Submit</button></div>
+                    </form>
+                </div>
+                <div class="mailme">
+                    <h1>
+                        Let's chat <br>Gimme any Suggestions about my project <br> Mail me 😉<br>
+                    </h1>
+                    <h2>
+                        Let's interact togather
+                    </h2>
+                    <div class="mailbox">
+                        <img src="th.jpeg" alt="">Mail me at <b> meghanchowdary89@gmail.com</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js">
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            const response = await fetch('/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formObject),
+            });
+            const result = await response.text();
+            console.log(result);
+        });
+    </script>
+    <script src="nodemailers.js" defer></script>
+</body>
+
+</html>
